@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/www/neon_massacre/nm/nm/Content/player.png</SourceFile>
-  <SourceTime>2026-05-05T11:18:34.782994+05:00</SourceTime>
-  <DestFile>C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/player.xnb</DestFile>
-  <DestTime>2026-05-05T11:19:23.1976249+05:00</DestTime>
+  <SourceFile>C:/www/neon_massacre/nm/nm/Content/bgl3.png</SourceFile>
+  <SourceTime>2026-04-28T22:57:12.2761099+05:00</SourceTime>
+  <DestFile>C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/bgl3.xnb</DestFile>
+  <DestTime>2026-05-04T17:13:15.985256+05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2025-10-20T19:25:32+05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

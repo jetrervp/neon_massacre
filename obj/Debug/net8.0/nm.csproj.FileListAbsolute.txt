@@ -33,3 +33,5 @@ C:\www\neon_massacre\nm\nm\obj\Debug\net8.0\refint\nm.dll
 C:\www\neon_massacre\nm\nm\obj\Debug\net8.0\nm.pdb
 C:\www\neon_massacre\nm\nm\obj\Debug\net8.0\nm.genruntimeconfig.cache
 C:\www\neon_massacre\nm\nm\obj\Debug\net8.0\ref\nm.dll
+C:\www\neon_massacre\nm\nm\bin\Debug\net8.0\Content\bgl3.xnb
+C:\www\neon_massacre\nm\nm\bin\Debug\net8.0\Content\bgl21.xnb
