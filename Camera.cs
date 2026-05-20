@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +16,20 @@ namespace nm
 
         public Vector2 Position => _position;
         public float Speed { get => _speed; set => _speed = value; }
+        public float ParallaxFactor => _parallaxFactor;
+        public Vector2 LastFrameDelta { get; private set; }
 
         public Camera(float speed, float parallaxFactor = 1.0f)
         {
             _position = Vector2.Zero;
             _speed = speed;
             _parallaxFactor = parallaxFactor;
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            LastFrameDelta = position - _position;
+            _position = position;
         }
 
         public void Move(Vector2 direction, float deltaTime)
@@ -37,7 +44,6 @@ namespace nm
 
             float startX = _position.X % textureSize.X;
             if (startX > 0) startX -= textureSize.X;
-
             float startY = _position.Y % textureSize.Y;
             if (startY > 0) startY -= textureSize.Y;
 
@@ -48,6 +54,16 @@ namespace nm
                     spriteBatch.Draw(texture, new Vector2(x, y), Color.White);
                 }
             }
+        }
+
+        public Vector2 WorldToScreen(Vector2 worldPosition, Viewport viewport)
+        {
+            return worldPosition - _position;
+        }
+
+        public Vector2 ScreenToWorld(Vector2 screenPosition)
+        {
+            return screenPosition + _position;
         }
     }
 }

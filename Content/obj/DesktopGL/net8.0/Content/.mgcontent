@@ -6,11 +6,17 @@
   <SourceFiles>
     <File>C:/www/neon_massacre/nm/nm/Content/bgl21.png</File>
     <File>C:/www/neon_massacre/nm/nm/Content/bgl3.png</File>
+    <File>C:/www/neon_massacre/nm/nm/Content/bullet.png</File>
+    <File>C:/www/neon_massacre/nm/nm/Content/enemy.png</File>
+    <File>C:/www/neon_massacre/nm/nm/Content/File.spritefont</File>
     <File>C:/www/neon_massacre/nm/nm/Content/player.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File>TimerFont.spritefont</File>
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
