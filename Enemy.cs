@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace nm
 {
@@ -8,23 +9,29 @@ namespace nm
     {
         private readonly Texture2D _texture;
         private Vector2 _position;
-        private Vector2 _velocity;
-
+        // статы
         public float Scale { get; set; } = 1.2f;
         public float Speed { get; set; } = 100f;
         public float Health { get; private set; }
-        public int Damage { get; set; } = 1;
+        public int Damage { get; set; } = 10;
+        public float ExpDropChance { get; set; } = 0.7f;
+        public int ExpValue { get; set; } = 10;
 
         private enum State { Idle, Chase, Attack }
         private State _currentState = State.Idle;
-        private float _attackRange = 10f;
+        private float _attackRange = 60f;
         private float _chaseRange = 1000f;
         private float _attackCooldown = 1.5f;
         private float _attackTimer = 1f;
 
+        private float _contactDamageTimer = 0f;
+        private float _contactDamageCooldown = 1f;
+
         private float _hitFlashTimer = 0f;
         private const float HIT_FLASH_DURATION = 0.2f;
         private Color _currentColor = Color.White;
+
+        private static Random _random = new Random();
 
         public Vector2 Center => new Vector2(
             _position.X + (_texture.Width * Scale) / 2f,
@@ -91,9 +98,7 @@ namespace nm
 
         private void Chase(Vector2 directionToPlayer, float deltaTime)
         {
-            if (directionToPlayer.LengthSquared() < 1f)
-                return;
-
+            if (directionToPlayer.LengthSquared() < 1f) return;
             directionToPlayer.Normalize();
             _position += directionToPlayer * Speed * deltaTime;
         }
@@ -102,6 +107,24 @@ namespace nm
         {
             player.TakeDamage(Damage);
             _attackTimer = _attackCooldown;
+        }
+
+        public void DealContactDamage(Player player, float deltaTime)
+        {
+            _contactDamageTimer -= deltaTime;
+            if (_contactDamageTimer <= 0)
+            {
+                player.TakeDamage(Damage);
+                _contactDamageTimer = _contactDamageCooldown;
+            }
+        }
+
+        // позиция дропа 
+        public Vector2? TryDropExperience()
+        {
+            if (_random.NextDouble() <= ExpDropChance)
+                return Center;
+            return null;
         }
 
         public void TakeDamage(int amount)
@@ -116,7 +139,6 @@ namespace nm
             if (!IsAlive) return;
 
             Vector2 screenPos = _position - camera.Position;
-
             spriteBatch.Draw(
                 _texture,
                 screenPos,

@@ -1,7 +1,8 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/www/neon_massacre/nm/nm/Content/bgl21.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/bgl21.xnb","TextureProcessor","Texture2DContent",39553,262229,0,1272238
-"C:/www/neon_massacre/nm/nm/Content/bgl3.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/bgl3.xnb","TextureProcessor","Texture2DContent",18807,262229,0,0096582
-"C:/www/neon_massacre/nm/nm/Content/bullet.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/bullet.xnb","TextureProcessor","Texture2DContent",991,1685,0,0025224
-"C:/www/neon_massacre/nm/nm/Content/enemy.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/enemy.xnb","TextureProcessor","Texture2DContent",2087,10085,0,0024238
-"C:/www/neon_massacre/nm/nm/Content/File.spritefont","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/TimerFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21529,0,0959797
-"C:/www/neon_massacre/nm/nm/Content/player.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/player.xnb","TextureProcessor","Texture2DContent",6070,111349,0,0039505
+"C:/www/neon_massacre/nm/nm/Content/bgl21.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/bgl21.xnb","TextureProcessor","Texture2DContent",39553,262229,0,1213326
+"C:/www/neon_massacre/nm/nm/Content/bgl3.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/bgl3.xnb","TextureProcessor","Texture2DContent",18807,262229,0,0093474
+"C:/www/neon_massacre/nm/nm/Content/bullet.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/bullet.xnb","TextureProcessor","Texture2DContent",991,1685,0,0023441
+"C:/www/neon_massacre/nm/nm/Content/enemy.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/enemy.xnb","TextureProcessor","Texture2DContent",2087,10085,0,0024555
+"C:/www/neon_massacre/nm/nm/Content/File.spritefont","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/TimerFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,37913,0,0787815
+"C:/www/neon_massacre/nm/nm/Content/orb.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/orb.xnb","TextureProcessor","Texture2DContent",7650,40085,0,0025279
+"C:/www/neon_massacre/nm/nm/Content/player.png","C:/www/neon_massacre/nm/nm/Content/bin/DesktopGL/player.xnb","TextureProcessor","Texture2DContent",6070,111349,0,0048237

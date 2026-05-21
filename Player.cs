@@ -16,10 +16,15 @@ namespace nm
 
         public float Scale { get; set; } = 0.5f;
         public float Speed { get; set; } = 150f;
-
         public float Health { get; private set; }
         public float MaxHealth { get; set; } = 100f;
+        public int BulletDamage { get; private set; } = 10;
         public bool IsAlive => Health > 0;
+
+        // система уровней
+        public int Level { get; private set; } = 1;
+        public int CurrentExperience { get; private set; } = 0;
+        public int ExperienceToNextLevel => Level * 100; // 100, 200, 300...
 
         private float _shootCooldown = 1.0f;
         private float _shootTimer = 0f;
@@ -45,6 +50,29 @@ namespace nm
             Health = MaxHealth;
         }
 
+        public void GainExperience(int amount)
+        {
+            CurrentExperience += amount;
+
+            while (CurrentExperience >= ExperienceToNextLevel)
+            {
+                CurrentExperience -= ExperienceToNextLevel;
+                LevelUp();
+            }
+        }
+
+        private void LevelUp()
+        {
+            Level++;
+
+            // автоматические улучшения при каждом уровне
+            MaxHealth += 10f;
+            Health = MaxHealth;
+            Speed += 5f;
+            BulletDamage += 5;
+            _shootCooldown = MathHelper.Max(0.2f, _shootCooldown - 0.05f);
+        }
+
         public void Update(GameTime gameTime, KeyboardState keyboardState, List<Projectile> projectiles, Camera camera)
         {
             if (!IsAlive) return;
@@ -53,11 +81,11 @@ namespace nm
             Vector2 movement = Vector2.Zero;
 
             if (keyboardState.IsKeyDown(Keys.D) || keyboardState.IsKeyDown(Keys.Right))
-                movement.X += 1;  
+                movement.X += 1;
             if (keyboardState.IsKeyDown(Keys.A) || keyboardState.IsKeyDown(Keys.Left))
-                movement.X -= 1;  
+                movement.X -= 1;
             if (keyboardState.IsKeyDown(Keys.S) || keyboardState.IsKeyDown(Keys.Down))
-                movement.Y += 1;  
+                movement.Y += 1;
             if (keyboardState.IsKeyDown(Keys.W) || keyboardState.IsKeyDown(Keys.Up))
                 movement.Y -= 1;
 
@@ -74,22 +102,20 @@ namespace nm
             }
         }
 
-
         private void ShootInAllDirections(List<Projectile> projectiles, Camera camera)
         {
-            // точка спавна пуль через камеру
             Vector2 spawnPos = GetVisualCenterWorldPosition(camera);
 
             var directions = new[]
             {
-                new Vector2(0, -1),   // вверх
-                new Vector2(0, 1),    // вниз
-                new Vector2(-1, 0),   // влево
-                new Vector2(1, 0),    // вправо
-                new Vector2(-1, -1),  // влево-вверх
-                new Vector2(1, -1),   // вправо-вверх
-                new Vector2(-1, 1),   // влево-вниз
-                new Vector2(1, 1)     // вправо-вниз
+                new Vector2(0, -1),
+                new Vector2(0, 1),
+                new Vector2(-1, 0),
+                new Vector2(1, 0),
+                new Vector2(-1, -1),
+                new Vector2(1, -1),
+                new Vector2(-1, 1),
+                new Vector2(1, 1)
             };
 
             foreach (var dir in directions)
@@ -98,7 +124,9 @@ namespace nm
                 if (normalizedDir != Vector2.Zero)
                     normalizedDir.Normalize();
 
-                projectiles.Add(new Projectile(_bulletTexture, spawnPos, normalizedDir));
+                var p = new Projectile(_bulletTexture, spawnPos, normalizedDir);
+                p.Damage = BulletDamage;
+                projectiles.Add(p);
             }
         }
 
@@ -122,11 +150,10 @@ namespace nm
                 (_texture.Width * Scale) / 2f,
                 (_texture.Height * Scale) / 2f
             );
-
             return screenCenter + camera.Position;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, SpriteFont font, Viewport viewport)
         {
             if (!IsAlive) return;
 
@@ -143,29 +170,53 @@ namespace nm
             );
 
             DrawHealthBar(spriteBatch);
+            DrawExperienceBar(spriteBatch, font, viewport);
         }
 
         private void DrawHealthBar(SpriteBatch spriteBatch)
         {
-            if (Health >= MaxHealth) return;
-
             var barWidth = 40;
             var barHeight = 5;
             var barPos = ScreenPosition + new Vector2(
                 (_texture.Width * Scale) / 2 - barWidth / 2,
-                -barHeight - 10
+                -barHeight - 18
             );
 
             spriteBatch.Draw(_whiteTexture,
                 new Rectangle((int)barPos.X, (int)barPos.Y, barWidth, barHeight),
-                Color.Black
-            );
+                Color.Black);
 
             var healthWidth = (int)(barWidth * (Health / MaxHealth));
             spriteBatch.Draw(_whiteTexture,
                 new Rectangle((int)barPos.X, (int)barPos.Y, healthWidth, barHeight),
-                Color.Red
-            );
+                Color.Red);
+        }
+
+        private void DrawExperienceBar(SpriteBatch spriteBatch, SpriteFont font, Viewport viewport)
+        {
+            int barHeight = 8;
+            int screenWidth = viewport.Width;
+
+            // фон полоски
+            spriteBatch.Draw(_whiteTexture,
+                new Rectangle(0, 0, screenWidth, barHeight),
+                Color.DarkBlue);
+
+            // заполнение опытом
+            int expWidth = (int)(screenWidth * ((float)CurrentExperience / ExperienceToNextLevel));
+            spriteBatch.Draw(_whiteTexture,
+                new Rectangle(0, 0, expWidth, barHeight),
+                Color.DeepSkyBlue);
+
+            // уровень справа сверху
+            if (font != null)
+            {
+                string lvlText = $"LV {Level}";
+                Vector2 textSize = font.MeasureString(lvlText);
+                spriteBatch.DrawString(font, lvlText,
+                    new Vector2(screenWidth - textSize.X - 10, barHeight + 4),
+                    Color.White);
+            }
         }
     }
 }

@@ -38,3 +38,4 @@ C:\www\neon_massacre\nm\nm\bin\Debug\net8.0\Content\bgl21.xnb
 C:\www\neon_massacre\nm\nm\bin\Debug\net8.0\Content\enemy.xnb
 C:\www\neon_massacre\nm\nm\bin\Debug\net8.0\Content\bullet.xnb
 C:\www\neon_massacre\nm\nm\bin\Debug\net8.0\Content\TimerFont.xnb
+C:\www\neon_massacre\nm\nm\bin\Debug\net8.0\Content\orb.xnb
