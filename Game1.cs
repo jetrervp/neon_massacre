@@ -63,7 +63,7 @@ namespace nm
             _layer2Size = new Vector2(_backgroundLayer2.Width, _backgroundLayer2.Height);
 
             _cameraLayer1 = new Camera(speed: 150f, parallaxFactor: 1.0f);
-            _cameraLayer2 = new Camera(speed: 80f, parallaxFactor: 0.5f);
+            _cameraLayer2 = new Camera(speed: 100f, parallaxFactor: 0.5f);
 
             _playerTexture = Content.Load<Texture2D>("player");
             _enemyTexture = Content.Load<Texture2D>("enemy");

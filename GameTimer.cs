@@ -66,27 +66,5 @@ namespace nm
             int seconds = totalSecs % 60;
             return $"{minutes:D2}:{seconds:D2}";
         }
-
-        // пауза
-        public bool IsPaused { get; private set; } = false;
-
-        public void Pause()
-        {
-            IsPaused = true;
-        }
-
-        public void Resume()
-        {
-            IsPaused = false;
-        }
-
-        // Update с учётом паузы
-        public void UpdateWithPause(GameTime gameTime)
-        {
-            if (!IsPaused)
-            {
-                _elapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-        }
     }
 }

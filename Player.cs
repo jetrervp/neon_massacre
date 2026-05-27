@@ -24,7 +24,7 @@ namespace nm
         // система уровней
         public int Level { get; private set; } = 1;
         public int CurrentExperience { get; private set; } = 0;
-        public int ExperienceToNextLevel => Level * 100; // 100, 200, 300...
+        public int ExperienceToNextLevel => Level * 100;
 
         private float _shootCooldown = 1.0f;
         private float _shootTimer = 0f;
